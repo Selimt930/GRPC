@@ -9,8 +9,8 @@ import (
 	"strconv"
 )
 
-//Massage struct defining key features for massage obj
-type Massage struct {
+//Message struct defining key features for massage obj
+type Message struct {
 	ID      string  `json:"id"`
 	In      string  `json:"in"`
 	Content string  `json:"content"`
@@ -30,69 +30,69 @@ var Users = map[string]string{
 	"user2": "password2",
 }
 
-// Init Massages var as a slice Massage struct
-var Massages []Massage
+// Init Messages var as a slice Message struct
+var Messages []Message
 
 // Get all massages ever sent
-func GetAllMassages(w http.ResponseWriter, r *http.Request) {
+func GetAllMessages(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(Massages)
+	json.NewEncoder(w).Encode(Messages)
 }
 
 // Get single massage by its id
-func GetMassage(w http.ResponseWriter, r *http.Request) {
+func GetMessage(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r) // Gets params
 
 	// Loop through massages and find one with the id from params
-	for _, mas := range Massages {
+	for _, mas := range Messages {
 		if mas.ID == params["id"] {
 			json.NewEncoder(w).Encode(mas)
 			return
 		}
 	}
-	json.NewEncoder(w).Encode(&Massage{})
+	json.NewEncoder(w).Encode(&Message{})
 }
 
 //Get massage by users id
-func GetUserMassage(w http.ResponseWriter, r *http.Request) {
+func GetUserMessage(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	var mas Massage
+	var mas Message
 	_ = json.NewDecoder(r.Body).Decode(&mas)
 
-	for _, i := range Massages {
+	for _, i := range Messages {
 		if mas.Author.Firstname == i.To {
 			json.NewEncoder(w).Encode(i)
 			return
 		}
 	}
-	//json.NewEncoder(w).Encode(&Massage{})
+	//json.NewEncoder(w).Encode(&Message{})
 }
 
 // Add new massage
-func WriteMassage(w http.ResponseWriter, r *http.Request) {
+func WriteMessage(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	user := r.Context().Value(auth.KeyContext)
-	var mas Massage
+	var mas Message
 
 	_ = json.NewDecoder(r.Body).Decode(&mas)
 	mas.ID = strconv.Itoa(rand.Intn(100000000))
 	mas.Author.ID = user.(string)
-	Massages = append(Massages, mas)
+	Messages = append(Messages, mas)
 	json.NewEncoder(w).Encode(mas)
 }
 
 // Update sent massage
-func UpdateMassage(w http.ResponseWriter, r *http.Request) {
+func UpdateMessage(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
-	for index, mas := range Massages {
+	for index, mas := range Messages {
 		if mas.ID == params["id"] {
-			Massages = append(Massages[:index], Massages[index+1:]...)
-			var mas Massage
+			Messages = append(Messages[:index], Messages[index+1:]...)
+			var mas Message
 			_ = json.NewDecoder(r.Body).Decode(&mas)
 			mas.ID = params["id"]
-			Massages = append(Massages, mas)
+			Messages = append(Messages, mas)
 			json.NewEncoder(w).Encode(mas)
 			return
 		}
@@ -100,14 +100,14 @@ func UpdateMassage(w http.ResponseWriter, r *http.Request) {
 }
 
 // Delete massage
-func DeleteMassage(w http.ResponseWriter, r *http.Request) {
+func DeleteMessage(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
-	for index, mas := range Massages {
+	for index, mas := range Messages {
 		if mas.ID == params["id"] {
-			Massages = append(Massages[:index], Massages[index+1:]...)
+			Messages = append(Messages[:index], Messages[index+1:]...)
 			break
 		}
 	}
-	json.NewEncoder(w).Encode(Massages)
+	json.NewEncoder(w).Encode(Messages)
 }

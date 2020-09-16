@@ -14,17 +14,17 @@ func main() {
 	// Init router
 	r := mux.NewRouter()
 
-	// Hardcoded data for 'Massages'
-	service.Massages = append(service.Massages, service.Massage{ID: "1", In: "438227", Content: "One", Author: &service.Author{Firstname: "John", Lastname: "Doe"}})
-	service.Massages = append(service.Massages, service.Massage{ID: "2", In: "454555", Content: "Two", Author: &service.Author{Firstname: "Steve", Lastname: "Smith"}})
+	// Hardcoded data for 'Messages'
+	service.Messages = append(service.Messages, service.Message{ID: "1", In: "438227", Content: "One", Author: &service.Author{Firstname: "John", Lastname: "Doe"}})
+	service.Messages = append(service.Messages, service.Message{ID: "2", In: "454555", Content: "Two", Author: &service.Author{Firstname: "Steve", Lastname: "Smith"}})
 
 	// Route handles & endpoints
-	r.HandleFunc("/massage", service.GetUserMassage).Methods("GET")
-	r.HandleFunc("/massages", service.GetAllMassages).Methods("GET")
-	r.HandleFunc("/massages/{id}", service.GetMassage).Methods("GET")
-	r.HandleFunc("/massages", temp.RequestVerification(service.WriteMassage)).Methods("POST")
-	r.HandleFunc("/massages/{id}", service.UpdateMassage).Methods("PUT")
-	r.HandleFunc("/massages/{id}", service.DeleteMassage).Methods("DELETE")
+	r.HandleFunc("/message", service.GetUserMessage).Methods("GET")
+	r.HandleFunc("/messages", service.GetAllMessages).Methods("GET")
+	r.HandleFunc("/messages/{id}", service.GetMessage).Methods("GET")
+	r.HandleFunc("/messages", temp.RequestVerification(service.WriteMessage)).Methods("POST")
+	r.HandleFunc("/messages/{id}", service.UpdateMessage).Methods("PUT")
+	r.HandleFunc("/messages/{id}", service.DeleteMessage).Methods("DELETE")
 
 	// Start server
 	log.Fatal(http.ListenAndServe(":8000", r))

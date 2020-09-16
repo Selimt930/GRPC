@@ -8,11 +8,11 @@ package service
 //
 //func ServiceMethods() *mux.Router {
 //	r := mux.NewRouter()
-//	r.HandleFunc("/massages", GetAllMassages).Methods("GET")
-//	r.HandleFunc("/massages/{id}", GetMassage).Methods("GET")
-//	r.HandleFunc("/massages", WriteMassage).Methods("POST")
-//	r.HandleFunc("/massages/{id}", UpdateMassage).Methods("PUT")
-//	r.HandleFunc("/massages/{id}", DeleteMassage).Methods("DELETE")
+//	r.HandleFunc("/massages", GetAllMessages).Methods("GET")
+//	r.HandleFunc("/massages/{id}", GetMessage).Methods("GET")
+//	r.HandleFunc("/massages", WriteMessage).Methods("POST")
+//	r.HandleFunc("/massages/{id}", UpdateMessage).Methods("PUT")
+//	r.HandleFunc("/massages/{id}", DeleteMessage).Methods("DELETE")
 //	return r
 //}
 //
