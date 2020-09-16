@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  mail_http:
+    stdin_open: true
+    build: .
+    ports:
+    - 8000:8000
+    depends_on:
+    - user_http
+
+  user_http:
+    build: /Users/selimtokhtarov/Desktop/httpCRUD
+    env_file: /Users/selimtokhtarov/Desktop/httpCRUD/.env
+    ports:
+    - 8888:8888
