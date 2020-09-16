@@ -1,8 +1,8 @@
-#Simple Mail Service Application
+# Simple Mail Service Application
 
 This application implements http protocol to send/receive messages for its users
 
-##Usage:
+## Usage:
 In order to use app you need to run it with docker-compose command "docker-compose up", but previously please PULL USER-SERVICE project and insert its path to "docker-compose.yml" file.
 
 After running current project with USER-SERVICE app:
