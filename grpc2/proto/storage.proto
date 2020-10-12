@@ -1,0 +1,34 @@
+syntax = "proto3";
+package service;
+import "google/protobuf/empty.proto";
+
+option go_package = ".;proto";
+
+message Message{
+    uint32 ID = 1;
+    string Content = 2;
+    string Firstname = 3;
+    string To = 4; 
+}
+
+message Request{
+    uint32 ID = 1;
+    Message element = 2;
+}
+
+message Response{
+    repeated Message elements = 1;
+}
+
+service ServiceStorage{
+    rpc GetAll (google.protobuf.Empty) returns (Response);
+    rpc Get (Request) returns (Response);
+    rpc GetUserMessage (Request) returns (Response);
+    rpc GetUserMes (Request) returns (Response);
+    rpc DeleteUserMes (Request) returns (Response);
+    rpc GetDeletedUserMes (Request) returns (Response);
+    rpc Write (Request) returns (Response);
+    rpc Update (Request) returns (Response);
+    rpc Delete (Request) returns (Response);
+    rpc Len(google.protobuf.Empty) returns (Response);
+}

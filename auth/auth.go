@@ -5,9 +5,10 @@ import (
 	"context"
 	//"encoding/json"
 	"errors"
-	"github.com/dgrijalva/jwt-go"
 	"net/http"
 	"strconv"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
 type Claims struct {
