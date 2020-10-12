@@ -59,9 +59,6 @@ func (m Store) DeleteUserMessage(msg Message, msgs []Message) ([]Message, error)
 }
 
 func (m Store) Update(c Message, id uint) (*Message, error) {
-	// if id >= m.Len() {
-	// 	return nil, errors.New("invalid id")
-	// }
 	if m.messages[id] == nil {
 		return nil, errors.New("message was deleted")
 	}
